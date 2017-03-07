@@ -6,13 +6,13 @@ package com.tab.list_implementation;
 
     public class ListImpl{
 
-        private Node start;
-        private Node stop;
+        private Node begin;
+        private Node end;
 
         public ListImpl(){
 
-            this.start = null;
-            this.stop = null;
+            this.begin = null;
+            this.end = null;
         }
 
         public void addElement(String value){
@@ -21,21 +21,21 @@ package com.tab.list_implementation;
             //tworzenie nowego elementu
 
             if(checkIsEmpty()){
-                start = node;
-                stop = node;
+                begin = node;
+                end = node;
             }
 
             else{
-                Node pm = start;
+                Node pm = begin;
 
 
                 while (pm != null ){
                     pm.getNext();
 
-                    if(pm == start){
+                    if(pm == begin){
                         node.setNext(pm);
                         pm.setPrev(node);
-                        start = node;
+                        begin = node;
                         break;
                     }else {
                         node.setNext(pm);
@@ -46,16 +46,35 @@ package com.tab.list_implementation;
                     }
                 }
                 if(pm == null){
-                    stop.setNext(node);
-                    node.setPrev(stop);
-                    stop = node;
+                    end.setNext(node);
+                    node.setPrev(end);
+                    end = node;
                 }
             }
         }
 
         public boolean checkIsEmpty(){
 
-            return (start == null);
+            return (begin == null);
+        }
+
+        public void showList(){
+
+            Node list = end;
+            while(list != null){
+                System.out.println(list.getValue());
+                list = list.getPrev();
+            }
+        }
+        public int size(){
+
+            Node list = begin;
+            int counter=0;
+            while (list !=null){
+                counter++;
+                list = list.getNext();
+            }
+            return counter;
         }
     }
 
